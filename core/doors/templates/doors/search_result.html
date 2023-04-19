@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block menu-text%}Результаты поиска{% endblock %}
+{% block video %}
+	<div class="subcategory-bgtext">
+		
+	</div>
+{% endblock %}
+{% block conthead %}
+	<h1 class="mb-5 pt-5 ct-title">
+		<span class="romb">Результаты поиска</span>
+	</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	 <div class="col-12 mb-5">
+ 		<h4>Фраза:</h4>
+		<form class="search-form mb-5" action="{% url 'doors:search_doors' %}">
+		<input class="search-inp" type="text" name="search" placeholder="{{search}}">
+		<button type="submit" class="btn-search-act"><i class="fa fa-search" aria-hidden="true"></i>
+		</button>  
+		</form> 
+		<hr>
+		{% if results and search %}
+		
+	 	{% for result in results %}
+	 	 <div class="col-6 col-lg-3 col-md-4 mb-5">
+			<div class="door-card">
+				<a href="{% url 'doors:doortype' result.id %}">
+				<img class="img-fluid" src="{{result.door_set.first.image.url}}">
+				<p class="door-text fw-bold"> {{result.title}}</p>
+			</a>
+			</div>
+		</div>	
+	 	{% endfor %}
+	 	{% else %}
+	 		Подходящих результатов не найдено.
+	 	{% endif %}
+	</div>
+</div>
+{% endblock %}
+
+{% block presentation %}
+{% endblock %}
+
+{% block contacts %}
+{% endblock %}
+

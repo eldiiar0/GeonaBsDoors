@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+
+{% block menu-text%}Новости{% endblock %}
+{% block video %}
+<div class="subcategory-bg" >
+	<img src="{{ news.image.url }}" width="100%" height="100%" >
+	<div class="subcategory-bgtext">
+			<span class="romb">{{ news.title }}</span>
+	</div>
+</div>
+{% endblock %}
+{% block conthead %}
+	<h1 class="mb-5 bot-border">
+		{{ news.title }}
+	</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	 <div class="col-12 mb-5">
+	 	{{ news.description|linebreaks }}
+	</div>
+</div>
+{% endblock %}
+
+{% block presentation %}
+	{% block news %}
+	
+	<div class="card-group">
+	    <div class="card transparent-bg border-0">
+	      <img src="{{news.extra_img1.url}}" class="dtype-img rounded-0" alt="...">
+	    </div>
+	    <div class="card transparent-bg border-0">
+	      <img src="{{news.extra_img2.url}}" class="dtype-img rounded-0" alt="...">
+	    </div>
+	    <div class="card transparent-bg border-0">
+	      <img src="{{news.extra_img3.url}}" class="dtype-img rounded-0" alt="...">
+	    </div>	    
+  </div>
+{% endblock %}
+{% endblock %}
+
+{% block contacts %}
+{% endblock %}
+

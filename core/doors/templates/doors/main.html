@@ -1,0 +1,131 @@
+{% extends 'index.html' %}
+{% block message %}
+
+{% if messages %}
+ {% for message in messages %}
+<div class="" style="position: fixed; top: 50%; left: 40%; z-index: 5;">
+	<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true"
+	style="background-color: white;">
+	  <div class="toast-header">
+	    <img src="../../media/logo/icon.png" style="width:30px; height:30px;" alt="...">
+	    <strong class="me-auto">Geona Bishkek</strong>
+	    <small></small>
+	    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+	  </div>
+	  <div class="toast-body">
+	    {{ message }}
+	  </div>
+	</div>
+</div>
+{% endfor %}
+
+
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="row">
+{% for category in categories %}
+<div class="col-12 col-lg-6 col-md-6">
+	<a href="{% url 'doors:category' category.id %}">
+		<div class="card border-0 rounded-0">
+			<img src="{{ category.image.url }}" class="" alt="Межкомнатные двери">
+			<div id="subtitle" class="card-img-overlay subtitle p-0 m-0">
+				<h5 class="bg-subtitle">{{ category.title }}</h5>
+			</div>
+		</div>
+	</a>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block news %}
+{% for one_news in news|slice:":3" %}
+	<div class="row pb-5">
+	  <div class="col-12 col-md-6 col-lg-4">
+	    <div class="card transparent-bg border-0">
+	      <img src="{{one_news.image.url}}" class="card-img-top rounded-0" alt="...">
+	      <div class="card-body p-0">
+	        <h6 class="card-title fw-bold mt-4">{{one_news.date}}</h6>
+	        <h5 class="card-title fw-bold mt-4">{{one_news.title}}</h5>
+	        <p class="card-text card-border mt-4 mb-5">{{one_news.description|truncatechars:200}}</p>
+	        <a href="{% url 'doors:news_dtl' one_news.id %}" class="card-btn rounded-pill">ПОДРОБНЕЕ</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+{% endfor %}
+{% endblock %}
+
+{% block textUs %}
+<div class="container background-section">
+	<div class="row">
+		<div><h1 class="mb-5 mt-3 bot-border fw-bold">Напишите нам</h1></div>
+		<div class="col-12 col-lg-8">
+			<form method="POST">
+				{% csrf_token %}
+				<div>
+			  		<label class="ct-icon" for="userName"><li class="fa fa-user"></li></label>
+			  			{{form.name}}
+				</div>
+				<div>	
+		 	 		<label class="ct-icon" for="userPhone"><li class="fa fa-phone"></li></label>
+		 	 		{{form.phone}}
+		 	 	</div>
+				<div>
+					<label class="ct-icon" for="userCity"><li class="fa fa-building-o"></li></label>
+					{{form.city}}
+				</div>
+				<div>
+					<label class="ct-icon" for="userEmail"><li class="fa fa-at"></li></label>
+					{{form.email}}
+				</div>
+				<div>
+					<label class="ct-icon" for="userMes" style="vertical-align: top;">
+						<li class="fa fa-envelope" ></li>
+					</label>
+					{{form.text_message}}
+				</div>
+				<p class="fw-bold">Даю согласие на обработку моих 
+				<a href="{% url 'doors:conf' %}" style="color:#B37735;"> персональных данных </a>
+				</p> 
+				<button type="submit" class="send-btn float-end fw-bold">ОТПРАВИТЬ</button>
+			</form>		
+		</div>
+    <div class="break-col"></div>
+		<div class="col-12 col-lg-4 contact-box">
+			<div class="tr-start"></div>
+			<div class="pt-3 pb-5">
+				<h4 class="m-4 fw-bold bot-border">КОНТАКТЫ</h4> 
+				<h5 class="m-4 fw-bold">Aдрес</h5>
+				<a class="m-4" href="https://go.2gis.com/lf3tso">Бишкек, Масалиева, 40а</a>
+				<h5 class="m-4 fw-bold">Email</h5>
+				<a class="m-4" 
+				href="mailto:a.eldiyar09@gmail.com?subject=Запрос&body=Здравствуйте!">info@geona-dveri.ru</a>
+				<h5 class="m-4 fw-bold">Телефон</h5>
+				<a class="m-4" 
+					href="https://api.whatsapp.com/send?phone=996550205777">0550 20 57 77</a> 
+					<br>
+					<br>
+				<a class="m-4" 
+					href="https://api.whatsapp.com/send?phone=996508205777">0508 20 57 77</a>
+				
+			</div>
+			<div class="tr-end"></div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+<!-- <div class="form-check form-switch m-3" >
+<h4>
+<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" 
+checked>
+</h4>
+<label class="form-check-label pt-1 fw-bold" for="flexSwitchCheckChecked">
+	Даю согласие на обработку моих 
+	<a href="{% url 'doors:conf' %}" style="color:#B37735;"> персональных данных </a> 
+</label>
+
+<button class="send-btn float-end fw-bold">ОТПРАВИТЬ</button>		
+</div>	 -->

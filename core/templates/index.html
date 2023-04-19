@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Двери Geona-Bishkek</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/media/logo/icon.png" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/phone-styles.css' %}">
+  <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+{% block message %}
+{% endblock %}
+<!-- Menu -->
+<!-- End Menu-->
+{% block header-img %}
+<div class="header-bg-img"></div>
+{% endblock %}
+<div class="header-vr">
+	<a href="{% url 'doors:main' %}">
+		<img src="/media/logo/logo-dark.png" class="header-logo-d mb-3"> 
+		<img src="/media/logo/logo.png" class="header-logo-w mb-3">
+	</a>
+	<div class="theme-btn" onclick="toggleMod()">
+            <svg class="sun rounded-circle" width="33" height="33" viewBox="0 0 48 48">
+                <rect x="12.3" y="23.5" width="2.6" height="1"></rect>
+                <rect x="16.1" y="15.3" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -6.8871 16.5732)" width="1" height="2.6"></rect>
+                <rect x="23.5" y="12.3" width="1" height="2.6"></rect>
+                <rect x="30.1" y="16.1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -2.5145 27.0538)" width="2.6" height="1"></rect>
+                <rect x="33.1" y="23.5" width="2.6" height="1"></rect>
+                <rect x="30.9" y="30.1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -12.9952 31.4264)" width="1" height="2.6"></rect>
+                <rect x="23.5" y="33.1" width="1" height="2.6"></rect>
+                <rect x="15.3" y="30.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -17.3677 20.9457)" width="2.6" height="1"></rect>
+                <path d="M24,18.7c-2.9,0-5.3,2.4-5.3,5.3s2.4,5.3,5.3,5.3s5.3-2.4,5.3-5.3S26.9,18.7,24,18.7z M24,28.3c-2.4,0-4.3-1.9-4.3-4.3s1.9-4.3,4.3-4.3s4.3,1.9,4.3,4.3S26.4,28.3,24,28.3z">
+                </path>
+            </svg>
+            <svg class="moon rounded-circle" width="33" height="33" viewBox="0 0 48 48">
+                <path d="M24,33.9c-5.4,0-9.9-4.4-9.9-9.9c0-4.3,2.7-8,6.8-9.4l0.8-0.3l-0.1,0.9c-0.2,0.6-0.2,1.3-0.2,1.9c0,5.2,4.3,9.5,9.5,9.5c0.6,0,1.3-0.1,1.9-0.2l0.8-0.2L33.3,27C32,31.1,28.3,33.9,24,33.9z M20.4,15.9c-3.2,1.4-5.3,4.5-5.3,8.1c0,4.9,4,8.9,8.9,8.9c3.6,0,6.7-2.1,8.1-5.3c-0.4,0-0.8,0.1-1.3,0.1c-5.8,0-10.5-4.7-10.5-10.5C20.4,16.7,20.4,16.3,20.4,15.9z">
+                </path>
+            </svg>
+	</div>
+
+	<div class="header-soc">
+		<a href="https://api.whatsapp.com/send?phone=996550205777">
+			<i class="fa fa-whatsapp pb-4" aria-hidden="true"></i>
+		</a>
+		<br>
+		<a href="https://www.instagram.com/geonabishkek/">
+			<i class="fa fa-instagram pt-2" style="font-size:20px;" aria-hidden="true"></i>
+		</a>
+	</div>
+	<div class="ph-catalog">
+			<a href="{% url 'doors:catalog' %}"><p>каталог</p></a>
+	</div>
+</div>
+<div class="header-vr-2 pt-4">
+	<span class="vertical text-uppercase">{% block menu-text%}ГЛАВНАЯ {% endblock %}</span>
+	<!-- <div class="menu-btn">Меню</div> -->
+	<div class="catalog">
+		<a href="{% url 'doors:catalog' %}"><p class="mb-3">каталог</p></a>
+		<button type="button" class="btn-search" data-bs-toggle="modal" data-bs-target="#searchModal">
+			<i class="fa fa-search" aria-hidden="true"></i>
+		</button>
+		<div class="scroll-top mt-3">
+			<img id="scroll-top" src="/media/default_img/scroll-top.svg" width="70" height="70">
+			
+			<div id="scroll-per">0%</div>
+		</div>
+	</div>
+</div>
+	<!-- <div id="scrollbar-container"><div id="scrollbar"></div></div>	 -->
+<div class="modal fade"  id="searchModal" tabindex="-1" 
+	aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <p class="modal-title" id="searchModalLabel">Поиск</p>
+      </div>
+      <div class="modal-body">
+      	<form class="search-form" action="{% url 'doors:search_doors' %}">
+		<input class="search-inp" type="text" name="search" placeholder="Введите фразу для поиска">
+		<button type="submit" class="btn-search-act"><i class="fa fa-search" aria-hidden="true"></i></button>  
+		</form>      
+      </div>
+    </div>
+  </div>
+</div>
+{% block video %}
+<!-- video -->
+<div class="background-section fw-bold shadow-bg">
+	<div class="video-block" >
+	<video class="video-hw" preload="auto" autoplay loop muted playsinline="true" 
+	disablepictureinpicture="true" poster="/media/default_img/prev-min.jpg">
+		<source src="/media/video/video_geona.webm" type="video/webm"/>
+		<source src="/media/video/video_geona.mp4" type="video/mp4"/>
+	</video>
+	</div>
+		<div class="box-title">
+			<div class="line-shap">
+				<p class="b-box">Официальный сайт фабрики</p>
+			</div>
+			<h1 class="letter-stroke">
+				23 года
+			 </h1>
+	 		<h1 class="video-title">на рынке дверей</h1>
+			<div class="line-shap">
+				<p class="video-subtitle">
+					<i class="fa fa-phone-square" aria-hidden="true"></i>
+					0550 20 57 77
+				</p>
+			</div>
+	</div>
+</div>
+<!-- end video -->
+{% endblock %}
+
+<div class="content">
+<div class="container background-section">
+	{% block conthead %}
+	<div class="mt-4">
+		<h6 class="title text-center" >КАТАЛОГ</h6>
+		<h2 class="mb-5 mt-3 bot-border">Что мы производим</h2>
+	</div>
+	{% endblock %}
+
+	{% block content %}
+	{% endblock %}
+
+	{% block presentation %}
+	<div class="mt-4">
+		<h6 class="title text-center " >О КОМПАНИИ </h6>
+		<h2 class="mb-5 mt-3 bot-border">Фабрика дверей GEONA</h2>
+	</div>
+	<div class="row mt-5 mb-3">
+		<div class="col-12 col-lg-7 mb-4">
+			<h4 class="fw-bold">
+				Ведущий производитель дверей на рынке России и в странах Ближнего Зарубежья.
+				Фабрика основана в 2000 году. Сегодня суммарная площадь предприятия составляет более 42 000 кв.м..	
+			</h4>
+			<p>
+				Двери Geona — продукт европейского уровня, соответствуют ГОСТ 475-2016, ИСО 9001-2015, санитарно-эпидемиологическим и экологическим требованиям. На межкомнатные двери Фабрика предоставляет паспорт качества, гарантию 7 лет.
+			</p>
+			<p>
+				Компания, шагая в ногу со временем, постоянно инвестирует в собственные производственные мощности и внедряет инновационные технологии, собственные уникальные разработки, увеличивая ассортимент, объемы и качество выпускаемой продукции.
+			</p>
+			<p class="fw-bold">Многолетний труд по разработке и производству дверей, заслуженно отмечен наградами и премиями:</p>
+			<li>«Национальный знак качества»;</li>
+			<li>«Надежный поставщик продукции и услуг»;</li>
+			<li>«Лучший производитель лесной и деревообрабатывающей промышленности»;</li>
+			<li>«Национальная марка качества»;</li>
+			<li>«100 лучших товаров России».</li>
+		</div>
+		<div class="col-12 col-lg-5 mb-5">
+			<div class="number-border">
+				<div class="number-img number fw-bold" 
+				style="background-image: url(/media/default_img/cooperation.jpg);">
+					23
+				</div>
+				<h3 class="fw-bold mt-4">ГОДА</h3>
+				<h3>НА РЫНКЕ ДВЕРЕЙ</h3>
+			</div>
+			<br>
+			<div class="number-border mt-5">
+				<div class="number-img number fw-bold" 
+				style="background-image: url(/media/default_img/prev-min.jpg);">
+					7
+				</div>
+				<h3 class="fw-bold mt-4">ЛЕТ</h3>
+				<h3>ГАРАНТИЯ НА ДВЕРИ</h3>
+			</div>
+		</div>
+	</div>
+	<a hidden class="btn-about">ПОДРОБНЕЕ...</a>	
+	<div class="mt-5">
+		<h6 class="title text-center ">Видео</h6>
+		<h2 class="mb-5 mt-3 bot-border">Презентация <br>Фабрики дверей Geona</h2>
+	</div>
+	<div class="presentation-bg">
+		<div class="presentation fw-bold">
+			<h3 class="bot-border mb-5">Межкомнатные и <br> металлические двери</h3>
+			<p>
+				Главная ценность продукции Фабрики дверей GEONA – ее неповторимость и оригинальность. Фабрика всегда ориентируется на конечного покупателя, максимально учитывает его индивидуальные запросы. Многолетний опыт, огромные возможности в производстве дверей позволяют выполнить практически любое желание клиента..
+			</p>
+			<div class="btn-area text-lg-start text-lg-start text-sm-end">
+			<button type="button" class="present-play-btn" data-bs-toggle="modal" data-bs-target="#video">
+				<i class="fa fa-play" aria-hidden="true"></i>
+			</button>
+			<p class="tb-border p-4 mt-4 ">ПРЕЗЕНТАЦИЯ ФАБРИКИ</p>
+			</div>
+				<div class="modal fade" id="video" tabindex="-1" 
+				aria-labelledby="videoLabel" aria-hidden="true">
+				  <div id="videoLabel" class="modal-dialog modal-dialog-centered" style="min-width:700px">
+				  	<div class="modal-content border-0" style="background-color: rgba(0, 0, 0, 0);">
+							<iframe width="700" height="450" src="https://www.youtube.com/embed/fOkGUTdnjJc" 
+								title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+								clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+								allowfullscreen>
+							</iframe>
+    			</div>
+				  </div>
+				</div>
+		</div>
+	</div>	
+
+<!-- news -->
+	<div class="mt-4">
+		<h6 class="title text-center">НОВОСТИ</h6>
+		<h2 class="mb-5 mt-3 bot-border">Последние новости</h2>
+	</div>
+	{% block news %}
+	{% endblock %}
+<!-- end news -->
+{% endblock %}
+</div>
+{% block contacts %}
+<div class="office-block">
+	<div class="container">
+		<div class="row justify-content-sm-center fw-bold">
+			<div class="col-sm-12 mb-5 pb-3 text-center">
+				<h4 class="">Приглашаем к сотрудничеству</h4>
+				<h5 class="coop-text">
+					Предлагаем Вам открыть свой бизнес вместе с фабрикой дверей Geona. Наши 
+					<br>
+					опытные специалисты окажут помощь в подборе и комплектации образцов, а 
+					<br>
+					также проконсультируют Вас по всем вопросам.
+				</h5>
+			</div>
+			<div class="col-sm mb-3">
+			<div class="card border-0">
+			  <div class="card-body p-0">
+					<img src="/media/default_img/office.jpg" class="card-img-top rounded-0" alt="...">
+					<h5 class="office-btn m-0">Панорама - Дверной Центр Geona в Чебоксарах</h5>
+			  </div>
+			</div>
+			</div>
+	    <div class="break-col"></div>
+			<div class="col-sm">
+			<div class="card border-0">
+			  <div class="card-body p-0">
+						<img src="/media/default_img/office.jpg" class="card-img-top rounded-0" alt="...">
+						<h5 class="office-btn m-0">Панорама - Дверной Центр Geona в Чебоксарах</h5>
+			  </div>
+			</div>
+			</div>
+		</div>	
+	</div>
+</div>	
+
+<!-- contacts block -->
+{% block textUs %}
+{% endblock %}
+{% endblock %}
+<!-- end contacts block -->
+<div class="footer">
+	<div class="container">
+	<div class="row">
+	<div class="col-12 col-lg-9 mb-5 text-center text-lg-start">
+	<a href="">
+		<img src="/media/logo/logo-dark.png" class="footer-logo-d mb-3">
+		<img src="/media/logo/logo.png" class="footer-logo-w mb-3">
+	</a>
+	<br>
+	<small class="fw-bold">		
+	ООО «GEONA» использует файлы «cookie», с целью персонализации сервисов и повышения удобства пользования веб-сайтом. «Cookie» представляют собой небольшие файлы, содержащие информацию о предыдущих посещениях веб-сайта. Если вы не хотите использовать файлы «cookie», измените настройки браузера.
+	</small>
+	</div>
+	<div class="break-col"></div>
+	<div class="col-12 col-lg-3 text-center text-lg-end">
+		<p class="fw-bold">Подписывайтесь</p>
+		<div></div>
+		<i class="fa fa-youtube-play border border-secondary p-2" aria-hidden="true"></i>
+		<i class="fa fa-instagram border border-secondary p-2" aria-hidden="true"></i>
+	</div>
+	<hr class="mt-4 mb-4">
+	<p class="fw-bold">2000 - 2023 © Geona Doors. Все права защищены.</p>
+	</div>
+	</div>
+</div>
+</div>
+</body>
+</html>
+
+<script>
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme == "dark") {
+	toggleMod()
+}
+
+function toggleMod() {
+	document.body.classList.toggle("dark-mode");
+	
+	let theme = "light";
+	// Если <body> содержит класс .dark-theme…
+	if (document.body.classList.contains("dark-mode")) {
+	    // …тогда делаем тему тёмной
+	    theme = "dark";
+	  }
+		// После чего сохраняем выбор в localStorage
+		localStorage.setItem("theme", theme);	
+}
+</script>
+
+<script>
+
+</script>
+
+<script type="text/javascript">
+	
+document.onscroll = function(){ 
+
+	var pos = getVerticalScrollPercentage(document.body)
+	var rotation = window.pageYOffset;
+	document.getElementById("scroll-per").innerHTML =Math.round(pos) + "%"
+	document.getElementById("scroll-top").style.transform = 'rotate(' + rotation + 'deg)';
+}
+
+function getVerticalScrollPercentage( elm ){
+  var p = elm.parentNode
+  return (elm.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight ) * 100
+}
+
+</script>
+
+

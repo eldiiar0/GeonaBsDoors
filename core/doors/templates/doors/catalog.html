@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+{% block menu-text%}Каталог продукции{% endblock %}
+{% block video %}
+	{% block header-img %}
+	<div class="header-bg-img" 
+		style="background-image: linear-gradient( rgba(0,0,0,0.35),rgba(0,0,0,0.35)), 
+				url('../../media/default_img/dileram_min.jpg');">
+	</div>
+	{% endblock %}
+{% endblock %}
+{% block conthead %}
+<div class="row">
+	<h1 class="ct-catalog mb-5"><span class="romb">Каталог продукции</span></h1>
+	</div>
+{% endblock %}
+{% block content %}
+<div class="row">
+{% for category in categories %}
+<div class="col-12 col-lg-6 col-md-6">
+	<a href="{% url 'doors:category' category.id %}">
+		<div class="card border-0 rounded-0">
+			<img src="{{ category.image.url }}" class="" alt="Межкомнатные двери">
+			<div id="subtitle" class="card-img-overlay subtitle p-0 m-0">
+				<h5 class="bg-subtitle">{{ category.title }}</h5>
+			</div>
+		</div>
+	</a>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
+
+
+{% block presentation %}
+{% endblock %}
+
+{% block contacts %}
+{% endblock %}

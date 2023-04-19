@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CSS3 Image Transform Gallery</title>
+</head>
+<body>
+    <ul>
+        <li><a href="#"><img src="club.jpg" alt="Club Card"></a></li>
+        <li><a href="#"><img src="diamond.jpg" alt="Diamond Card"></a></li>
+        <li><a href="#"><img src="spade.jpg" alt="Spade Card"></a></li>
+        <li><a href="#"><img src="heart.jpg" alt="Heart Card"></a></li>
+    </ul>
+
+    <h1>Magnetic Buttons On Mousemove</h1>
+
+    <a href="#" class="mag color-01">
+      <span>Hover Me</span>
+    </a>
+    <a href="#" class="mag color-02">
+      <span>I am Magnetic</span>
+    </a>
+    <a href="#" class="mag color-03">
+      <span>Read More</span>
+    </a>
+
+    <script type="text/javascript">
+    const btns = document.querySelectorAll(".mag");
+
+    btns.forEach((btn) => {
+      btn.addEventListener("mousemove", function(e){
+        const position = btn.getBoundingClientRect();
+        const x = e.pageX - position.left - position.width / 2;
+        const y = e.pageY - position.top - position.height / 2;
+
+        btn.children[0].style.transform = "translate(" + x * 0.3 + "px, " + y * 0.5 + "px)";
+      });
+    });
+
+    btns.forEach((btn) => {
+      btn.addEventListener("mouseout", function(e){
+        btn.children[0].style.transform = "translate(0px, 0px)";
+      });
+    });
+    </script>
+<div class="example">
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tortor vel justo tristique dictum.</p>
+  <p>Aliquam erat volutpat. Proin maximus, sapien quis sagittis fermentum, mi ex hendrerit nunc, vel maximus lorem neque id tellus.</p>
+  <p>Mauris mollis, tortor nec laoreet aliquam, augue mauris fringilla justo, a luctus lorem nibh vitae massa.</p>
+  <p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>p>Vestibulum nec lorem vel arcu auctor ultricies ac vitae eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+</div>
+  </body>
+</html>
+<style type="text/css">
+  
+html, body {
+  height: 100%;
+  direction: rtl;
+}
+
+html > * {
+  direction: ltr;
+}
+
+body {
+  overflow-y: scroll;
+  padding-left: 17px;
+}
+
+body::-webkit-scrollbar {
+  width: 17px;
+  height: 17px;
+  background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #A9A9A9;
+  border-radius: 10px;
+}
+    ul {
+        margin: 50px;
+        list-style: none;
+    }
+    ul li {
+        margin: 10px;
+        display: inline-block;
+    }
+    ul li a {
+        padding: 5px;
+        display: inline-block;      
+        border: 1px solid #f2f2f2;
+    }
+    ul li a img {
+        width: 125px;
+        height: 125px;
+        display: block;
+    }
+    ul li a:hover img {
+        transform: scale(1.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+.mag{
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mag span{
+  display: inline-block;
+  transition: transform 0.15s linear;
+}
+
+.color-01 span{
+  background: linear-gradient(90deg, #EC5C1A, #F6CE61);
+}
+
+.color-02 span{
+  background: linear-gradient(90deg, #0165CD, #55E6FB);
+}
+
+.color-03 span{
+  background: linear-gradient(90deg, #259844, #6FF192);
+}
+
+h1{
+  color: #222;
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.8em;
+  font-weight: 800;
+}
+      
+</style>
+
+
+<button class="magnetic">Magnet button</button>
+
+<script type="text/javascript">
+  let offset = 50, cur = false;
+
+document.body.addEventListener('mouseenter', function(e) {
+  if(e.target.classList.contains('magnetic') && cur === false) {
+    cur = {
+        e: e.target,
+      x: e.target.getBoundingClientRect().left,
+      y: e.target.getBoundingClientRect().top
+    };
+  }
+}, true);
+
+document.addEventListener('mousemove', function(e) {
+    if(cur !== false) {
+    let x = (e.clientX - cur.x) - (cur.e.getBoundingClientRect().width / 2),
+            y = (e.clientY - cur.y) - (cur.e.getBoundingClientRect().height / 2);
+    cur.e.style.transform = `translate(${x}px,${y}px)`;
+    //
+    if(Math.abs(x) >= offset || Math.abs(y) >= offset) {
+        cur.e.style.transform = 'translate(0,0)';
+      cur = false;
+    }
+  }
+});
+</script>
+
